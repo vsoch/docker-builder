@@ -133,7 +133,7 @@ jobs:
             echo "Testing ls of Docker container:"
             echo "Container name set to ${CONTAINER_NAME}"
             docker run -it --rm=false \
-              ${CONTAINER_NAME}:latest ls /
+              ${CONTAINER_NAME}:latest Ohmy.
       - store_test_results:
           path: /home/circleci/out/tests
 
