@@ -1,10 +1,9 @@
 FROM continuumio/miniconda3
 
 ###############################################
-# SciF Base
 #
-# docker build -t vanessa/cowsay .
-# docker run vanessa/cowsay
+# docker build -t vanessa/cowthink .
+# docker run vanessa/cowthink
 #
 ###############################################
 
@@ -14,14 +13,18 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get install -y wget \
                                          unzip \
                                          apt-utils \
-                                         python
+                                         python \
+                                         cowsay \
+                                         figlet \
+                                         fortune
 
-# Install scif from pypi
-RUN /opt/conda/bin/pip install scif==0.0.75
 
-# Install the filesystem from the recipe
-ADD *.scif /
-RUN scif install /recipe.scif
+# Build Arguments
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VERSION
 
-# SciF Entrypoint
-ENTRYPOINT ["scif"]
+
+ENV PATH /usr/games:$PATH  
+LABEL THECOWSAYS MOO
+ENTRYPOINT ["cowthink"]
